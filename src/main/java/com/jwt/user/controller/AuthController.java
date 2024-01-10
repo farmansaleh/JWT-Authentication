@@ -1,5 +1,6 @@
 package com.jwt.user.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jwt.user.models.AuthRequest;
 import com.jwt.user.models.AuthResponse;
+import com.jwt.user.models.RefreshTokenRequest;
 import com.jwt.user.models.User;
 import com.jwt.user.service.AuthService;
 
@@ -26,6 +28,11 @@ public class AuthController {
 	@PostMapping(value = "/login")
 	public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest authReq) {
 		return ResponseEntity.ok(authService.login(authReq));
+	}
+	
+	@PostMapping(value = "/refreshtoken")
+	public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest tokenReq) {
+		return ResponseEntity.ok(authService.refreshToken(tokenReq.getRefreshToken()));
 	}
 	
 }
